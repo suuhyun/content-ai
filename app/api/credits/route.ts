@@ -1,3 +1,4 @@
+import { POINTS_PER_QUESTION } from "@/lib/constants";
 import { db, getUserCredit } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
@@ -17,8 +18,6 @@ export async function POST(req: Request) {
       return new NextResponse("User not Authenticated", { status: 401 });
     }
 
-    const pointsToDeduct = 10;
-
     const user = await db.user.findUnique({
       where: { userId },
       select: { totalCredit: true },
@@ -28,19 +27,19 @@ export async function POST(req: Request) {
       return new NextResponse("User not found", { status: 404 });
     }
 
-    if (user.totalCredit < pointsToDeduct) {
+    if (user.totalCredit < POINTS_PER_QUESTION) {
       return new NextResponse("Not enough points", { status: 403 });
     }
 
     await db.user.update({
       where: { userId },
-      data: { totalCredit: user.totalCredit - pointsToDeduct },
+      data: { totalCredit: user.totalCredit - POINTS_PER_QUESTION },
     });
 
     return new NextResponse(
       JSON.stringify({
         success: true,
-        newCredit: user.totalCredit - pointsToDeduct,
+        newCredit: user.totalCredit - POINTS_PER_QUESTION,
       }),
       {
         status: 200,

@@ -2,18 +2,27 @@ import Stripe from "stripe";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { POINTS_PER_QUESTION } from "@/lib/constants";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function POST(req: Request) {
   try {
     const { userId } = await auth();
-    const user = await currentUser();
+    const clerkUser = await currentUser();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    const user = await db.user.findUnique({
+      where: { userId },
+      select: { totalCredit: true },
+    });
+
+    if (!user) {
+      return new NextResponse("User not found", { status: 404 });
+    }
     const { packageType } = await req.json();
 
     const packages = {
@@ -55,7 +64,7 @@ export async function POST(req: Request) {
 
     if (!stripeCustomer) {
       const customer = await stripe.customers.create({
-        email: user?.emailAddresses[0].emailAddress,
+        email: clerkUser?.emailAddresses[0].emailAddress,
       });
 
       stripeCustomer = await db.stripeCustomer.create({
@@ -73,7 +82,8 @@ export async function POST(req: Request) {
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard?category=All`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
       metadata: {
-        userId: userId,
+        userId,
+        packageType,
       },
     });
 

@@ -21,20 +21,19 @@ export function UserCreditProvider({
 }) {
   const [totalCredit, setTotalCredit] = useState<number>(0);
   const { userId } = useAuth();
-
+  
   const fetchCredits = useCallback(async () => {
     if (!userId) return;
 
     try {
       const response = await fetch(`/api/credits`);
       if (!response.ok) throw new Error("Failed to fetch credits");
-
       const data = await response.json();
-      setTotalCredit(data.totalCredit ?? 0);
+      setTotalCredit(data.totalCredit);
     } catch (error) {
       console.error("Error fetching credits:", error);
     }
-  }, [userId]);
+  }, [totalCredit, userId]);
 
   const deductCredit = async (points: number) => {
     if (!userId) return;
@@ -58,8 +57,8 @@ export function UserCreditProvider({
   };
 
   useEffect(() => {
-    fetchCredits();
-  }, [fetchCredits]);
+    if (userId) fetchCredits();
+  }, [userId, fetchCredits]);
 
   return (
     <UserCreditContext.Provider

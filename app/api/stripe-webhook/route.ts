@@ -31,8 +31,9 @@ export async function POST(req: Request) {
   const userId = session?.metadata?.userId;
   const packageType = session?.metadata?.packageType;
 
+
   if (event.type === "checkout.session.completed") {
-    if (!userId || !packageType || !(packageType in packages)) {
+    if (!userId || !packageType) {
       return new NextResponse("Invalid session", { status: 400 });
     }
 
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
           totalCredit: user.totalCredit + selectedPackage.points,
         },
       });
-      
+
     } catch (error) {
       return new NextResponse("Error updating user credits", { status: 500 });
     }

@@ -42,7 +42,11 @@ export async function getUserCredit(userId: string) {
       select: { totalCredit: true },
     });
 
-    return user?.totalCredit ?? 0;
+    if (!user) {
+      console.error("User not found in getUserCredit");
+      return 0;
+    }
+    return user.totalCredit
   } catch (error) {
     console.error("Failed to fetch user credit:", error);
     return 0;
