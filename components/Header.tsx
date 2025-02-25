@@ -41,7 +41,11 @@ export default function Header({
               </div>
             </div>
             <div className="hidden xl:block min-w-0 flex-1">
-              {onSearchInput && <Categories onSearchInput={onSearchInput} />}
+              {onSearchInput && (
+                <Suspense fallback={<div>Loading categories...</div>}>
+                  <Categories onSearchInput={onSearchInput} />
+                </Suspense>
+              )}
             </div>
           </div>
         )}
