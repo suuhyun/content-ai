@@ -17,7 +17,7 @@ ContentAI is a full-stack web application designed to generate high-quality cont
 - **Dark Mode Support**: Modern UI with light and dark themes.
 
 ## 🛠️ Tech Stack
-- **Frontend**: Next.js (App Router), React, TypeScript, Tailwind CSS, ShadCN
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS, ShadCN
 - **Backend**: Next.js API Routes, Prisma ORM
 - **Database**: PostgreSQL (via Prisma)
 - **Authentication**: Clerk
