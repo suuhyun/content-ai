@@ -1,3 +1,5 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge";
 import { categories } from "@/lib/constants";
 import Link from "next/link";
