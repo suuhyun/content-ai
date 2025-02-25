@@ -31,7 +31,6 @@ export default function Header({
         {type === "search" && (
           <div className="flex max-md:flex-col items-center gap-4 min-w-0 flex-1 max-w-4xl">
             <div className="relative w-full max-w-md">
-              <div className="search-gradient" />
               <div className="relative">
                 <Search className="search-icon" />
                 <Input
@@ -42,11 +41,7 @@ export default function Header({
               </div>
             </div>
             <div className="hidden xl:block min-w-0 flex-1">
-              {onSearchInput && (
-                <Suspense fallback={<div>Loading categories...</div>}>
-                  <Categories onSearchInput={onSearchInput} />
-                </Suspense>
-              )}
+              {onSearchInput && <Categories onSearchInput={onSearchInput} />}
             </div>
           </div>
         )}
@@ -58,8 +53,9 @@ export default function Header({
           />
         )}
       </div>
-
-      <Auth />
+      <div className="ml-5">
+        <Auth />
+      </div>
       {/* {type === "search" && onSearchInput && (
         <div className="md:hidden px-4 pb-4">
           <Categories onSearchInput={onSearchInput} />
