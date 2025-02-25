@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 import { Categories } from "@/app/dashboard/components/Categories";
 import HistorySearch from "@/app/dashboard/history/components/HistorySearch";
 import Auth from "./Auth";
+import { Suspense } from "react";
 
 interface HeaderProps {
   type?: "default" | "search" | "history";
@@ -41,7 +42,11 @@ export default function Header({
               </div>
             </div>
             <div className="hidden xl:block min-w-0 flex-1">
-              {onSearchInput && <Categories onSearchInput={onSearchInput} />}
+              {onSearchInput && (
+                <Suspense fallback={<div>Loading categories...</div>}>
+                  <Categories onSearchInput={onSearchInput} />
+                </Suspense>
+              )}
             </div>
           </div>
         )}

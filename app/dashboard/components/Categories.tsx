@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { categories } from "@/lib/constants";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface CategoryProps {
   onSearchInput: (value: string) => void;
@@ -11,7 +12,14 @@ interface CategoryProps {
 
 export function Categories({ onSearchInput }: CategoryProps) {
   const searchParams = useSearchParams();
-  const currentCategory = searchParams.get("category") || "all";
+
+  const [currentCategory, setCurrentCategory] = useState(
+    searchParams.get("category") || "all"
+  );
+
+  useEffect(() => {
+    setCurrentCategory(searchParams.get("category") || "all");
+  }, [searchParams]);
 
   return (
     <div className="flex gap-2 pb-2 md:pb-0">
