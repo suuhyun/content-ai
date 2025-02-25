@@ -21,7 +21,7 @@ ContentAI is a full-stack web application designed to generate high-quality cont
 - **Backend**: Next.js API Routes, Prisma ORM
 - **Database**: PostgreSQL (via Prisma)
 - **Authentication**: Clerk
-- **AI API**: DeepSeek AI
+- **AI API**: Gemini AI
 - **Payments**: Stripe
 
 ## Future Improvements
