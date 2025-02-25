@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f5fdea62-e037-48d1-8284-e16de2bfed98" alt="Project Banner" width="100%">
+</p>
 
 # 🚀 AI Content Generator
 
