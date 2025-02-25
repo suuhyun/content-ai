@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+const dotenv = require("dotenv");
 
-const nextConfig: NextConfig = {
-  /* config options here */
+dotenv.config();
+
+module.exports = {
+  reactStrictMode: true,
+  env: {
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  },
 };
-
-export default nextConfig;

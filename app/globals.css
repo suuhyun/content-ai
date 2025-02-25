@@ -1,21 +1,299 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-outfit: "Outfit", sans-serif;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-outfit);
+  }
+}
+
+@layer utilities {
+  .bg-primary {
+    @apply bg-gradient-to-br from-violet-50 to-pink-50 dark:from-gray-900 dark:to-gray-800;
+  }
+
+  .heading-primary {
+    @apply text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-pink-600 dark:from-violet-400 dark:to-pink-400;
+  }
+
+  .card-hover {
+    @apply absolute inset-0 bg-gradient-to-br from-violet-500/5 to-pink-500/5 dark:from-violet-400/5 dark:to-pink-400/5 opacity-0 group-hover:opacity-100 transition-opacity;
+  }
+
+  .sidebar-active {
+    @apply bg-violet-500/10 text-violet-600 dark:text-violet-400;
+  }
+
+  .sidebar-inactive {
+    @apply text-gray-600 dark:text-gray-300 hover:!text-violet-600 dark:hover:!text-violet-400 hover:!bg-violet-500/10;
+  }
+
+  .search-icon {
+    @apply absolute z-10 left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 dark:text-gray-400;
+  }
+
+  .search-input {
+    @apply pl-10 rounded-xl bg-white/10 dark:bg-gray-800/10 border-0 backdrop-blur-xl focus-visible:!ring-2 focus-visible:!ring-violet-500/50 dark:focus-visible:!ring-violet-400/50;
+  }
+
+  .search-gradient {
+    @apply absolute inset-0 bg-gradient-to-r from-violet-600/10 to-pink-600/10 rounded-full blur-xl;
+  }
+  /* History */
+
+  .gradient-youtube {
+    @apply bg-gradient-to-br from-red-500/20 to-red-600/20 dark:from-red-500/10 dark:to-red-600/10;
+  }
+
+  .gradient-instagram {
+    @apply bg-gradient-to-br from-pink-500/20 to-purple-600/20 dark:from-pink-500/10 dark:to-purple-600/10;
+  }
+
+  .gradient-linkedin {
+    @apply bg-gradient-to-br from-blue-500/20 to-blue-600/20 dark:from-blue-500/10 dark:to-blue-600/10;
+  }
+
+  .gradient-twitter {
+    @apply bg-gradient-to-br from-sky-500/20 to-sky-600/20 dark:from-sky-500/10 dark:to-sky-600/10;
+  }
+
+  .gradient-tiktok {
+    @apply bg-gradient-to-br from-violet-500/20 to-violet-600/20 dark:from-violet-500/10 dark:to-violet-600/10;
+  }
+
+  .gradient-default {
+    @apply bg-gradient-to-br from-gray-500/20 to-gray-600/20 dark:from-gray-500/10 dark:to-gray-600/10;
+  }
+
+  .text-default {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .text-youtube {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  .text-instagram {
+    @apply text-pink-600 dark:text-pink-400;
+  }
+
+  .text-linkedin {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  .text-twitter {
+    @apply text-sky-600 dark:text-sky-400;
+  }
+
+  .text-tiktok {
+    @apply text-violet-600 dark:text-violet-400;
+  }
+
+  /* Content Card */
+  .content-youtube {
+    @apply bg-red-500/10 dark:bg-red-500/5;
+  }
+
+  .content-instagram {
+    @apply bg-pink-500/10 dark:bg-pink-500/5;
+  }
+
+  .content-linkedin {
+    @apply bg-blue-500/10 dark:bg-blue-500/5;
+  }
+
+  .content-twitter {
+    @apply bg-sky-500/10 dark:bg-sky-500/5;
+  }
+
+  .content-tiktok {
+    @apply bg-violet-500/10 dark:bg-violet-500/5;
+  }
+
+  .editor-wrapper {
+    @apply rounded-2xl overflow-hidden bg-white/10 dark:bg-gray-800/10 backdrop-blur-xl p-5 h-[300px] overflow-y-auto;
+  }
+
+  .editor-content {
+    @apply max-w-none text-gray-800 dark:text-gray-200 text-sm leading-7 whitespace-pre-line;
+  }
+
+  .editor-content h1,
+  .editor-content h2,
+  .editor-content h3 {
+    @apply text-violet-600 dark:text-violet-400 font-bold;
+  }
+
+  .editor-content strong {
+    @apply text-violet-500 dark:text-violet-400;
+  }
+
+  .editor-content blockquote {
+    @apply border-l-4 border-violet-500 pl-4 italic text-gray-600 dark:text-gray-400;
+  }
+
+  .editor-content ul {
+    @apply list-disc pl-6;
+  }
+
+  .editor-content ol {
+    @apply list-decimal pl-6;
+  }
+
+  .editor-content code {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+  }
+
+  .glass-bg {
+    @apply bg-white/10 backdrop-blur-xl;
+  }
+
+  .glass-hover {
+    @apply hover:bg-white/20 transition-all duration-300;
+  }
+
+  .subtext {
+    @apply text-gray-600 dark:text-gray-400 mt-1;
+  }
+  .input-field {
+    @apply w-full focus-visible:!ring-2 focus-visible:!ring-violet-500/50 dark:focus-visible:!ring-violet-400/50 
+      !bg-white/10 !backdrop-blur-sm hover:!bg-white/20 !transition-all !duration-300 rounded-xl !ring-0 !border-0
+      placeholder:!text-violet-400/40 dark:placeholder:!text-violet-300/30;
+  }
+
+  .textarea-field {
+    @apply w-full !bg-white/10 backdrop-blur-sm focus-visible:!ring-2 focus-visible:!ring-violet-500/50 
+      dark:focus-visible:ring-violet-400/50 hover:bg-white/20 transition-all duration-300 
+      rounded-xl min-h-[200px] resize-none ring-0 border-0 placeholder:text-violet-400/40 dark:placeholder:text-violet-300/30;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-violet-600/20 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none; 
+  }
+
+  .card {
+    @apply relative h-full rounded-2xl bg-white/5 p-6 transition-all hover:bg-white/10 dark:hover:bg-gray-800/50 border border-violet-200/10 dark:border-violet-700/10 overflow-hidden;
+  }
+
+  .card-gradient {
+    @apply absolute inset-0 bg-gradient-to-br from-violet-500/[0.075] to-pink-500/[0.075];
+  }
+
+  .card-title {
+    @apply font-semibold text-gray-800 dark:text-gray-200 line-clamp-1;
+  }
+
+  .category-active {
+    @apply !bg-violet-500 !text-white !border-violet-500 dark:!bg-violet-600 dark:!border-violet-600;
+  }
+
+  .category-inactive {
+    @apply !text-gray-600 dark:!text-gray-300 !bg-white/5 !border-violet-200/10 hover:!bg-violet-500/10 dark:hover:!bg-violet-500/20;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
